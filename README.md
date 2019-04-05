@@ -1,5 +1,7 @@
 # Task List Kata
 
+![https://cdn-std.dprcdn.net/files/acc_731676/EDUl5O](https://cdn-std.dprcdn.net/files/acc_731676/EDUl5O)
+
 Just a lil' Friday Code Kata.
 
 Built using create-react-app, React, Mobx.
