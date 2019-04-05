@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
 import "./App.css";
-import tasks from "./tasks";
 
+import Header from "./components/Header/Header";
 import Summary from "./components/Summary/Summary";
 import Group from "./components/Group/Group";
 
@@ -10,39 +10,32 @@ import Group from "./components/Group/Group";
 @observer
 class App extends Component {
   _renderGroups = () => {
-    const groups = Object.keys(this.props.store.groups).map(group => {
-      return {
-        title: group,
-        completeCount: this.props.store.groups[group].filter(
-          task => task.completedAt !== null
-        ).length,
-        totalCount: this.props.store.groups[group].length
-      };
-    });
-
-    return groups.map(group => (
+    return this.props.store.groupSummaries.map(group => (
       <Summary
         key={`summary-${group.title}`}
         title={group.title}
-        completedCount={group.completeCount}
+        completedCount={group.completedCount}
         totalCount={group.totalCount}
       />
     ));
   };
 
+  _renderTasksForGroup = () => {
+    return <Group tasks={this.props.store.tasksForGroup} />;
+  };
+
   _renderUI = () => {
-    if (this.props.store.showAllGroups) {
+    if (this.props.store.isGroupSelected) {
+      return this._renderTasksForGroup();
+    } else {
       return this._renderGroups();
     }
-
-    return null;
   };
 
   render() {
     return (
       <div className="App">
-        <h1>{this.props.store.pageTitle}</h1>
-        <button onClick={this.props.store.viewAll}>All Groups</button>
+        <Header />
         {this._renderUI()}
       </div>
     );

@@ -1,18 +1,19 @@
 import React from "react";
-import { inject } from "mobx-react";
+import { observer, inject } from "mobx-react";
 
 import "./Summary.scss";
 import group from "../../images/Group.svg";
 
 @inject("store")
-class Summary extends React.PureComponent {
+@observer
+class Summary extends React.Component {
   _pickGroup = () => {
     const { store, title } = this.props;
     store.pickGroup(title);
   };
 
   render() {
-    const { store, title, completedCount, totalCount } = this.props;
+    const { title, completedCount, totalCount } = this.props;
 
     return (
       <div className="summary" onClick={this._pickGroup}>
