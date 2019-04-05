@@ -9,6 +9,10 @@ export default class TodoStore {
   @observable isGroupSelected = false;
   @observable tasks = [];
 
+  /**
+   * Returns all of the tasks for the currently selected group.
+   * @return {array} the tasks for the selected group.
+   */
   @computed get tasksForGroup() {
     return this.groupedTasks[this.title].map(task => {
       let locked = false;
@@ -22,6 +26,10 @@ export default class TodoStore {
     });
   }
 
+  /**
+   * Groups all of the tasks in the system by group name.
+   * @return {object} the tasks grouped by name as the key.
+   */
   @computed get groupedTasks() {
     return this.tasks.reduce(function(r, a) {
       r[a.group] = r[a.group] || [];
@@ -30,6 +38,10 @@ export default class TodoStore {
     }, {});
   }
 
+  /**
+   * Returns an array of group summaries.
+   * @return {array} the summaries for each group detected in the task data.
+   */
   @computed get groupSummaries() {
     return Object.keys(this.groupedTasks).map(key => {
       return {
