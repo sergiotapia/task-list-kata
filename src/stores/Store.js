@@ -72,17 +72,22 @@ export default class TodoStore {
       task.completedAt = Date.now();
     } else {
       task.completedAt = null;
-      let parentIds = [];
-
-      parentIds = this.tasks
-        .filter(t => t.dependencyIds.includes(taskId))
-        .map(t => t.id);
-
-      parentIds.forEach(depId => {
-        let dependencyTask = this.tasks.filter(t => t.id === depId)[0];
-        dependencyTask.completedAt = null;
-      });
+      this.untoggleParents(taskId);
     }
+  };
+
+  untoggleParents = taskId => {
+    let parentIds = [];
+
+    parentIds = this.tasks
+      .filter(t => t.dependencyIds.includes(taskId))
+      .map(t => t.id);
+
+    parentIds.forEach(depId => {
+      const parentTask = this.tasks.filter(t => t.id === depId)[0];
+      parentTask.completedAt = null;
+      this.untoggleParents(parentTask.id);
+    });
   };
 
   @action
