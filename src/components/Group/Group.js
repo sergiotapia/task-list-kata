@@ -11,6 +11,7 @@ export default class Group extends React.PureComponent {
       <div className="group">
         {tasks.map(task => (
           <Task
+            key={`task-${task.id}`}
             id={task.id}
             label={task.label}
             locked={task.lock}

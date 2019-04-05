@@ -25,7 +25,7 @@ class Task extends React.PureComponent {
     return (
       <div className="task" onClick={this._handleClick}>
         <div className="task__checkbox">
-          <input type="checkbox" name={id} id={id} checked={checked} />
+          <input type="checkbox" name={id} id={id} readOnly checked={checked} />
           <span className={customCheckboxClasses} />
         </div>
         <p className={labelClasses}>{label}</p>
