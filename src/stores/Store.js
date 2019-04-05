@@ -15,7 +15,7 @@ export default class TodoStore {
    */
   @computed get tasksForGroup() {
     return this.groupedTasks[this.title].map(task => {
-      let locked = false;
+      let locked = this.isTaskLocked(task);
 
       return {
         id: task.id,
@@ -25,6 +25,17 @@ export default class TodoStore {
       };
     });
   }
+
+  isTaskLocked = task => {
+    let locked = false;
+    task.dependencyIds.forEach(taskId => {
+      let dependencyTask = this.tasks.filter(t => t.id === taskId)[0];
+      if (dependencyTask.completedAt === null) {
+        locked = true;
+      }
+    });
+    return locked;
+  };
 
   /**
    * Groups all of the tasks in the system by group name.

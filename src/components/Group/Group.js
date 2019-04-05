@@ -14,7 +14,7 @@ export default class Group extends React.PureComponent {
             key={`task-${task.id}`}
             id={task.id}
             label={task.label}
-            locked={task.lock}
+            locked={task.locked}
             checked={task.checked}
           />
         ))}

@@ -6,8 +6,10 @@ import "./Task.scss";
 @inject("store")
 class Task extends React.PureComponent {
   _handleClick = () => {
-    const { id, store } = this.props;
-    store.toggleTask(id);
+    const { id, store, locked = false } = this.props;
+    if (!locked) {
+      store.toggleTask(id);
+    }
   };
 
   render() {
