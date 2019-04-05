@@ -1,0 +1,30 @@
+.summary:last-of-type {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.summary {
+  border-top: 1px solid #f0f0f0;
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &__group-icon {
+    margin-right: 25px;
+  }
+
+  &__info {
+    &__title {
+      color: #505050;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    &__totals {
+      color: #b7b7b7;
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: bold;
+    }
+  }
+}
