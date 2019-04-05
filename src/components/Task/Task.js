@@ -1,8 +1,15 @@
 import React from "react";
+import { inject } from "mobx-react";
 import cx from "classnames";
 import "./Task.scss";
 
-export default class Task extends React.PureComponent {
+@inject("store")
+class Task extends React.PureComponent {
+  _handleClick = () => {
+    const { id, store } = this.props;
+    store.toggleTask(id);
+  };
+
   render() {
     const { id, label, checked = false, locked = false } = this.props;
 
@@ -16,7 +23,7 @@ export default class Task extends React.PureComponent {
     });
 
     return (
-      <div className="task">
+      <div className="task" onClick={this._handleClick}>
         <div className="task__checkbox">
           <input type="checkbox" name={id} id={id} checked={checked} />
           <span className={customCheckboxClasses} />
@@ -26,3 +33,5 @@ export default class Task extends React.PureComponent {
     );
   }
 }
+
+export default Task;

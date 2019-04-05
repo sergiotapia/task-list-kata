@@ -55,6 +55,16 @@ export default class TodoStore {
   }
 
   @action
+  toggleTask = taskId => {
+    const task = this.tasks.filter(t => t.id === taskId)[0];
+    if (task.completedAt === null) {
+      task.completedAt = Date.now();
+    } else {
+      task.completedAt = null;
+    }
+  };
+
+  @action
   deselectGroup = () => {
     this.title = "Things To Do";
     this.isGroupSelected = false;
