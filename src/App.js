@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
+import tasks from "./tasks";
 
-import Task from "./components/Task/Task";
+import Group from "./components/Group/Group";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Task id="3" label="Test" locked={true} />
-        <Task id="1" label="Test" checked={false} />
-        <Task id="2" label="Test" checked={true} />
+        <Group tasks={tasks} />
       </div>
     );
   }
